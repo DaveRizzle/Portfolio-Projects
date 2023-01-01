@@ -78,7 +78,7 @@ st.subheader("Total Times Woke Up")
 st.markdown("\n\n")
 st.line_chart(df_select[['times_woke_up']])
 
-# Moving average from 50 days to 730 days.
+# Moving Averages for all Metrics.
 st.subheader("Moving Average of Times Woke Up")
 movevavg_len = st.slider('Select the number of days for Moving Averages',min_value=0,max_value=6,value=730)
 moveavg_oc = df_select[['deep_sleep_perc','light_sleep_perc', 'rem_sleep_perc', 'times_woke_up_perc']].rolling(50).mean()
