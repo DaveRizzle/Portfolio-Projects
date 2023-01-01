@@ -79,7 +79,7 @@ st.markdown("\n\n")
 st.line_chart(df_select[['times_woke_up']])
 
 # Moving Averages for all Metrics.
-st.subheader("Moving Average of Times Woke Up")
+st.subheader("Moving Averages")
 movevavg_len = st.slider('Select the number of days for Moving Averages',min_value=0,max_value=6,value=730)
 moveavg_oc = df_select[['deep_sleep_perc','light_sleep_perc', 'rem_sleep_perc', 'times_woke_up_perc']].rolling(50).mean()
 st.line_chart(moveavg_oc)
