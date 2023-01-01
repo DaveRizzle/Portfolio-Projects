@@ -1,2 +1,1 @@
-gsheetsdb==0.1.13.1
-streamlit==1.10.0
+
