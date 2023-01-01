@@ -1,1 +1,1 @@
-gsheetsdb==2.0
+gsheetsdb==x.x.x
