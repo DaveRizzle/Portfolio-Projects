@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import datetime
 
-df = pd.read_csv('cleaned_sleep_data_all.csv')
+df = pd.read_csv('https://raw.githubusercontent.com/DaveRizzle/Portfolio-Projects/main/cleaned_sleep_data_all.csv')
 
 # Reset the index to the Date column. 
 df['date'] = pd.to_datetime(df['date'],format='%Y/%m/%d')
