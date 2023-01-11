@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import datetime
+import seaborn as sns
 
 df = pd.read_csv('https://raw.githubusercontent.com/DaveRizzle/Portfolio-Projects/main/cleaned_sleep_data_all.csv')
 
@@ -63,23 +64,20 @@ if(start_date != None or end_date != None):
     else:
         st.warning("Invalid Date Range - Re-enter Dates")
 
-# Deep vs Light Sleep 
-st.subheader("Light and Deep Sleep Comparison")
-st.markdown("\n\n")
-st.line_chart(df_select[['light_sleep_perc','deep_sleep_perc']])
-
-
-# REM vs Light Sleep 
-st.subheader("REM and Light Sleep Comparison")
-st.markdown("\n\n")
-st.line_chart(df_select[['rem_sleep_perc','light_sleep_perc']])
-
-st.subheader("Total Times Woke Up")
-st.markdown("\n\n")
-st.line_chart(df_select[['times_woke_up']])
-
-# Moving Averages for all Metrics.
-st.subheader("Moving Averages")
-movevavg_len = st.slider('Select the number of days for Moving Averages',min_value=0,max_value=6,value=730)
+# Trends a glance
+st.subheader("Data at a glance")
 moveavg_oc = df_select[['deep_sleep_perc','light_sleep_perc', 'rem_sleep_perc', 'times_woke_up_perc']].rolling(50).mean()
 st.line_chart(moveavg_oc)
+
+ef = pd.read_csv('https://raw.githubusercontent.com/DaveRizzle/Portfolio-Projects/main/sleep_data_pandas.csv')
+
+st.subheader("Exploratory Data Analysis: Pair Plot")
+fig = sns.pairplot(data=ef, hue="deep_sleep_perc", palette="viridis")
+st.pyplot(fig)
+
+# define the mask to set the values in the upper triangle to True
+st.subheader("Triangle Correlation Heatmap with Steps Data")
+fig, ax = plt.subplots(figsize = (16,6))
+mask = np.triu(np.ones_like(ef.corr(), dtype=bool))
+sns.heatmap(ef.corr(), mask=mask, ax=ax, vmin=-1, vmax=1, annot=True, cmap='viridis', fmt='.2%')
+st.write(fig)
